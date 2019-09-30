@@ -1,26 +1,31 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useEffect, useState } from 'react';
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Card from './Card';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  const [weatherData, setWeatherdata] = useState([]);
+
+  useEffect(() => {
+    getData();
+  }, []);
+
+  const getData = async () => {
+    const response = await fetch('https://mm214.com/demo.php');
+    const data = await response.json();
+    // console.log(data);
+    setWeatherdata(data);
+  };
+  console.log(weatherData);
+  if (weatherData.length == 0) {
+    return <h1> Waiting for Data</h1>;
+  } else {
+    return (
+      <div className="App">
+        <Card data={weatherData} />
+      </div>
+    );
+  }
 }
 
 export default App;
