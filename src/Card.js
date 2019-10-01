@@ -7,7 +7,7 @@ function Card(prop) {
   let main = data.main;
 
   return (
-    <div className="card col-12 col-md-6">
+    <div className="card col-12 col-md-6 mt-3">
       <h1>Weather for {data.name}</h1>
       <p>Description: {weather.description}</p>
       <p>Temp: {main.temp}</p>
